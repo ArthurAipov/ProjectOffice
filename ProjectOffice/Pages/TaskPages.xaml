@@ -1,0 +1,66 @@
+﻿<Page x:Class="ProjectOffice.Pages.TaskPages"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ProjectOffice.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Loaded="Page_Loaded"
+      Title="TaskPages">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Text="Задачи"
+                   Grid.ColumnSpan="2"
+                   Margin="15"
+                   FontWeight="SemiBold"
+                   FontSize="20" />
+        <DataGrid Grid.Row="1"
+                  Name="DataGridTasks"
+                  Margin="0,0,10,0"
+                  ColumnWidth="*"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  SelectionChanged="DataGridTasks_SelectionChanged"
+                  Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="N"
+                                    Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Short Title"
+                                    Binding="{Binding ShortTitle}" />
+                <DataGridTextColumn Header="Full Title"
+                                    Binding="{Binding FullTitle}" />
+                <DataGridTextColumn Header="Employee"
+                                    Binding="{Binding Employee.Name}" />
+                <DataGridTextColumn Header="Deadline"
+                                    Binding="{Binding Deadline}" />
+                <DataGridTextColumn Header="Status"
+                                    Binding="{Binding TaskStatus.Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Frame Name="TaskFrame"
+               NavigationUIVisibility="Hidden"
+               Grid.Column="1"
+               Grid.Row="1"
+               Navigated="TaskFrame_Navigated"/>
+        <Button Grid.Row="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Add New Task"
+                Width="150"
+                Name="ButtonAdd"
+                Click="ButtonAdd_Click" />
+    </Grid>
+</Page>

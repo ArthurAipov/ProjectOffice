@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a4fc21acfcc4042a9e0fb7029b6c887" Name="Diagram1" ZoomLevel="198">
+        <EntityTypeShape EntityType="TaskListModel.Attachment" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.Comments" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.Employee" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.Observer" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.Project" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.Task" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.TaskStatus" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskListModel.UpdateStatus" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="TaskListModel.FK_Attachment_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Comments_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Comments_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Observer_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Project_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Project_Employee1" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Task_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Observer_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Task_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Task_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_Task_TaskStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_UpdateStatus_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskListModel.FK_UpdateStatus_TaskStatus" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
