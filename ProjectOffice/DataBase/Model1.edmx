@@ -424,7 +424,7 @@
           <NavigationProperty Name="Observer" Relationship="Self.FK_Observer_Task" FromRole="Task" ToRole="Observer" />
           <NavigationProperty Name="Project" Relationship="Self.FK_Task_Project" FromRole="Task" ToRole="Project" />
           <NavigationProperty Name="Task1" Relationship="Self.FK_Task_Task" FromRole="Task" ToRole="Task1" />
-          <NavigationProperty Name="Task2" Relationship="Self.FK_Task_Task" FromRole="Task1" ToRole="Task" />
+          <NavigationProperty Name="TaskPrevoius" Relationship="Self.FK_Task_Task" FromRole="Task1" ToRole="Task" />
           <NavigationProperty Name="TaskStatus" Relationship="Self.FK_Task_TaskStatus" FromRole="Task" ToRole="TaskStatus" />
           <NavigationProperty Name="UpdateStatus" Relationship="Self.FK_UpdateStatus_Task" FromRole="Task" ToRole="UpdateStatus" />
         </EntityType>

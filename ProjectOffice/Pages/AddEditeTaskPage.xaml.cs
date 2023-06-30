@@ -51,7 +51,7 @@ namespace ProjectOffice.Pages
                 DatePickerDeadline.BlackoutDates.AddDatesInPast();
             }
             ComboBoxEmployee.ItemsSource = GlobalSettings.DB.Employee.ToList();
-            ComboBoxTask.ItemsSource = GlobalSettings.DB.Task.Where(p => p.ProjectId == GlobalSettings.CurrentProject.Id).ToList();
+            ComboBoxTask.ItemsSource = GlobalSettings.DB.Task.Where(p => p.ProjectId == GlobalSettings.CurrentProject.Id && p.Id != task.Id).ToList();
             ComboBoxStatus.ItemsSource = GlobalSettings.DB.TaskStatus.ToList();
             DataContext = task;
 
@@ -88,6 +88,9 @@ namespace ProjectOffice.Pages
                 MessageBox.Show(errorMessage);
                 return;
             }
+            var selectedPreviousTask = ComboBoxTask.SelectedItem as DataBase.Task;
+            if (selectedPreviousTask != null)
+                task.PreviousTaskId = selectedPreviousTask.Id;
             if (IsAdd)
                 GlobalSettings.DB.Task.Add(task);
             GlobalSettings.DB.SaveChanges();
