@@ -26,7 +26,7 @@
             <TextBlock Text="PreviousTask"/>
             <ComboBox DisplayMemberPath="ShortTitle"
                       Name="ComboBoxTask"
-                      SelectedItem="{Binding TaskPrevoius}"/>
+                      SelectedItem="{Binding TaskPrevious}"/>
             <TextBlock Text="CreatedTime"/>
             <DatePicker SelectedDate="{Binding CreatedTime}"
                         Name="DatePickerCreatedTime" />

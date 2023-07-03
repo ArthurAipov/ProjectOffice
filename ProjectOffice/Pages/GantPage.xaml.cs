@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectOffice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace ProjectOffice.Pages
         public GantPage()
         {
             InitializeComponent();
+            
         }
+
+        private void RefreshChart()
+        {
+            var project = GlobalSettings.CurrentProject;
+            if(project != null)
+            {
+                var tasks = GlobalSettings.DB.Task.Where(p => p.ProjectId == project.Id);
+            }
+        }
+
     }
 }

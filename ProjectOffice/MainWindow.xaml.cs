@@ -1,7 +1,9 @@
-﻿using ProjectOffice.DataBase;
+﻿using ProjectOffice.AppWindows;
+using ProjectOffice.DataBase;
 using ProjectOffice.Models;
 using ProjectOffice.Pages;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -14,7 +16,7 @@ namespace ProjectOffice
         public MainWindow()
         {
             InitializeComponent();
-           if(!string.IsNullOrWhiteSpace(Properties.Settings.Default.OpenedPage))
+            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.OpenedPage))
                 MainFrame.NavigationService.Navigate(new Uri("Pages/" + Properties.Settings.Default.OpenedPage, UriKind.Relative));
             var version = GetVersionProject();
             TextBlockVersion.Text = "Version" + version;
@@ -24,14 +26,21 @@ namespace ProjectOffice
 
         private string GetVersionProject()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Version version = assembly.GetName().Version;
-            version = new Version(version.Major, version.Minor, version.Build + 1, version.Revision);
-            var versionString = $"{version.Major}.{version.Minor}.{version.Build.ToString("000")}";
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            Properties.Settings.Default.BuildVersion++;
+            Properties.Settings.Default.Save();
+            var versionString = $"{version.Major}.{version.Minor}.{(version.Build + Properties.Settings.Default.BuildVersion).ToString("00")}";
             return versionString;
         }
 
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            var frame = MainFrame.Content as Page;
+            var frameName = frame.GetType().Name + ".xaml";
+            Properties.Settings.Default.OpenedPage = frameName;
+            Properties.Settings.Default.Save(); 
+        }
 
         private void ButtonDashBoard_Click(object sender, RoutedEventArgs e)
         {
@@ -45,7 +54,7 @@ namespace ProjectOffice
 
         private void ButtonGant_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new GantPage());
+            new GantWindow().ShowDialog();
         }
 
         private void ComboBoxProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,6 +67,6 @@ namespace ProjectOffice
             }
         }
 
-      
+
     }
 }

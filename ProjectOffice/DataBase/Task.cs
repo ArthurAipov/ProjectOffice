@@ -49,7 +49,7 @@ namespace ProjectOffice.DataBase
         public virtual Project Project { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Task1 { get; set; }
-        public virtual Task TaskPrevoius { get; set; }
+        public virtual Task TaskPrevious { get; set; }
         public virtual TaskStatus TaskStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UpdateStatus> UpdateStatus { get; set; }

@@ -54,7 +54,7 @@
                NavigationUIVisibility="Hidden"
                Grid.Column="1"
                Grid.Row="1"
-               Navigated="TaskFrame_Navigated"/>
+               Navigated="TaskFrame_Navigated" />
         <Button Grid.Row="2"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"

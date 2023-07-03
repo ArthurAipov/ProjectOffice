@@ -7,16 +7,24 @@
       xmlns:winForms="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d"
       d:DesignHeight="450"
+      xmlns:winforms="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       d:DesignWidth="800"
       Title="GantPage">
 
     <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Text="Гант"
                    Margin="15"
                    FontWeight="SemiBold"
                    FontSize="20" />
-        
+        <WindowsFormsHost Grid.Row="2">
+            <winforms:Chart x:Name="chart" />
+        </WindowsFormsHost>
     </Grid>
 </Page>
