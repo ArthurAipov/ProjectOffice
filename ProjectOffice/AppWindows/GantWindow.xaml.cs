@@ -27,22 +27,22 @@ namespace ProjectOffice.AppWindows
         public GantWindow()
         {
             InitializeComponent();
-            var taskArea = GantChart.ChartAreas.Add("TaskArea");
+            GantChart.ChartAreas.Add("TaskArea");
             RefreshChart();
         }
 
         private void RefreshChart()
         {
             GantChart.Series.Clear();
+            var taskSeria = GantChart.Series.Add("TaskSeria");
             var project = GlobalSettings.CurrentProject;
             if (project == null)
             {
-                MessageBox.Show("Select project");
+                MessageBox.Show("Select poject");
                 return;
             }
-            var seriaTask = GantChart.Series.Add("SeriaRow");
+            taskSeria.ChartType = SeriesChartType.RangeBar;
             var tasks = GlobalSettings.DB.Task.Where(p => p.ProjectId == project.Id).ToList();
-            seriaTask.ChartType = SeriesChartType.RangeBar;
             var startTimes = tasks.Select(x => x.StartActualTime).ToList();
             var finishTimes = tasks.Select(x => x.FinishActualTime).ToList();
             for (int i = 0; i < tasks.Count; i++)
@@ -53,12 +53,12 @@ namespace ProjectOffice.AppWindows
                     finishTimes[i] = finishTimes[i].AddHours(12);
                 }
             }
-            seriaTask.Points.DataBindXY(startTimes, finishTimes);
+            taskSeria.Points.DataBindY(startTimes, finishTimes);
             var taskName = tasks.Select(x => x.ShortTitle).ToList();
-            for (int i = 0; i < seriaTask.Points.Count; i++)
+            for (int i = 0; i < taskSeria.Points.Count; i++)
             {
-                seriaTask.Points[i].AxisLabel = taskName[i];
-                seriaTask.Points[i].Color = System.Drawing.Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
+                taskSeria.Points[i].AxisLabel = taskName[i];
+                taskSeria.Points[i].Color = System.Drawing.Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
             }
             GantChart.ChartAreas[0].AxisY.LabelStyle.Angle = 45;
             GantChart.ChartAreas[0].AxisY.Interval = 1;
