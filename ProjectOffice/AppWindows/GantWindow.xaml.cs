@@ -27,7 +27,7 @@ namespace ProjectOffice.AppWindows
         public GantWindow()
         {
             InitializeComponent();
-            GantChart.ChartAreas.Add("TaskArea");
+            GantChart.ChartAreas.Add("TaskChartArea");
             RefreshChart();
         }
 
@@ -35,14 +35,14 @@ namespace ProjectOffice.AppWindows
         {
             GantChart.Series.Clear();
             var taskSeria = GantChart.Series.Add("TaskSeria");
+            taskSeria.ChartType = SeriesChartType.RangeBar;
             var project = GlobalSettings.CurrentProject;
             if (project == null)
             {
-                MessageBox.Show("Select poject");
+                MessageBox.Show("Select project");
                 return;
             }
-            taskSeria.ChartType = SeriesChartType.RangeBar;
-            var tasks = GlobalSettings.DB.Task.Where(p => p.ProjectId == project.Id).ToList();
+            var tasks = GlobalSettings.DB.Task.Where(x => x.ProjectId == project.Id).ToList();
             var startTimes = tasks.Select(x => x.StartActualTime).ToList();
             var finishTimes = tasks.Select(x => x.FinishActualTime).ToList();
             for (int i = 0; i < tasks.Count; i++)
@@ -52,27 +52,33 @@ namespace ProjectOffice.AppWindows
                     startTimes[i] = startTimes[i].AddHours(-12);
                     finishTimes[i] = finishTimes[i].AddHours(12);
                 }
+
             }
             taskSeria.Points.DataBindY(startTimes, finishTimes);
-            var taskName = tasks.Select(x => x.ShortTitle).ToList();
+            var taskNames = tasks.Select(x => x.ShortTitle).ToList();
             for (int i = 0; i < taskSeria.Points.Count; i++)
             {
-                taskSeria.Points[i].AxisLabel = taskName[i];
-                taskSeria.Points[i].Color = System.Drawing.Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
+                taskSeria.Points[i].AxisLabel = taskNames[i];
+                taskSeria.Points[i].Color = System.Drawing.Color.FromArgb(
+                    (byte)random.Next(0, 255),
+                    (byte)random.Next(0, 255),
+                    (byte)random.Next(0, 255));
             }
             GantChart.ChartAreas[0].AxisY.LabelStyle.Angle = 45;
             GantChart.ChartAreas[0].AxisY.Interval = 1;
             GantChart.ChartAreas[0].AxisY.IntervalType = DateTimeIntervalType.Days;
             if (Tick != 0)
             {
-                GantChart.ChartAreas[0].AxisY.Maximum = tasks.Max(x => x.FinishActualTime).AddDays(Interval + Tick).ToOADate();
-                GantChart.ChartAreas[0].AxisY.Minimum = tasks.Max(x => x.StartActualTime).AddDays(-Interval - Tick).ToOADate();
+                GantChart.ChartAreas[0].AxisY.Maximum = tasks.Max(x => x.FinishActualTime).AddDays((Interval /2) + (Tick /2)).ToOADate();
+                GantChart.ChartAreas[0].AxisY.Minimum = tasks.Max(x => x.StartActualTime).AddDays(-(Interval / 2) - (Tick / 2)).ToOADate();
             }
             else if (Interval != 0)
             {
-                GantChart.ChartAreas[0].AxisY.Maximum = tasks.Max(x => x.FinishActualTime).AddDays(Interval).ToOADate();
-                GantChart.ChartAreas[0].AxisY.Minimum = tasks.Min(x => x.StartActualTime).AddDays(-Interval).ToOADate();
+                GantChart.ChartAreas[0].AxisY.Maximum = tasks.Max(x => x.FinishActualTime).AddDays(Interval / 2).ToOADate();
+                GantChart.ChartAreas[0].AxisY.Minimum = tasks.Max(x => x.StartActualTime).AddDays(-(Interval / 2)).ToOADate();
             }
+
+
         }
 
 
